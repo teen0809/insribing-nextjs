@@ -17,17 +17,7 @@ interface ExtendedNextApiRequest extends NextApiRequest {
   };
 }
 
-async function waitSeconds(time: number): Promise<void> {
-  return new Promise<void>((resolve) => {
-    setTimeout(() => {
-      resolve();
-    }, time);
-  });
-}
-
 const handler = async (req: ExtendedNextApiRequest, res: NextApiResponse) => {
-  await waitSeconds(10000);
-
   const txData = await getTx(req.body.txid);
   await mockWallet.init();
   console.log("mockWallet.fundingAddress", mockWallet.fundingAddress);

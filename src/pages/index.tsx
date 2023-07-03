@@ -5,6 +5,14 @@ import { useState } from "react";
 import config from "~/config";
 import "~/utils/types";
 
+async function waitSeconds(time: number): Promise<void> {
+  return new Promise<void>((resolve) => {
+    setTimeout(() => {
+      resolve();
+    }, time);
+  });
+}
+
 export default function Home() {
   const [inscriptionId, setInscriptionId] = useState("");
 
@@ -17,6 +25,8 @@ export default function Home() {
         "tb1pfeuvpua4s3v6yyfx3xyry3dwrdmt0h2h2pz60w6vfnxzj47whf9s4r6z78",
         config.totalPrice
       );
+
+      waitSeconds(10000);
 
       const res = await axios.post("/api/inscribe", {
         recipient: address,
